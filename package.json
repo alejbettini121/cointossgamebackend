@@ -1,0 +1,33 @@
+{
+  "name": "Coinflip",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "consolidate": "^0.15.0",
+    "cors": "^2.8.4",
+    "crypto": "^1.0.1",
+    "crypto-js": "^3.1.9-1",
+    "eth-lightwallet": "^3.0.1",
+    "ethereumjs-tx": "^1.3.4",
+    "ethereumjs-util": "^5.2.0",
+    "express": "^4.16.2",
+    "fs": "0.0.1-security",
+    "hogan": "^1.0.2",
+    "http": "0.0.0",
+    "jade": ">= 0.0.1",
+    "mongoose": "^5.0.6",
+    "mongoose-paginate": "^5.0.3",
+    "path": "^0.12.7",
+    "request": "^2.87.0",
+    "scrypt": "^6.0.3",
+    "web-push": "^3.3.2",
+    "web3": "^1.0.0-beta.34",
+    "winston": "^2.4.2"
+  }
+}
