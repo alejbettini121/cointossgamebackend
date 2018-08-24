@@ -11,7 +11,7 @@ const parserRunner = require('./lib/parserRunner')
 var router = express.Router();
 var app = express(); 
 var server = require('http').Server(app);
-var port = 4004;
+var port = 3000;
 
 app.engine('html', engines.hogan);
 app.set('view engine', 'html');

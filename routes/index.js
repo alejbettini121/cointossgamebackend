@@ -4,16 +4,40 @@ const WinLoseModel = require('../lib/models/event/finalResultModel')
 const AnalyzedTicketModel = require('../lib/models/event/analyzedTicketModel')
 const TicketModel = require('../lib/models/ticket/ticketModel')
 const logger = require('../config/logger')
+var keccak256 = require('js-sha3').keccak256;
+var bigInt = require("big-integer");
+
+createRandom32Bytes = function() {
+
+	var byteArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+    for ( var index = byteArray.length-1; index >=0; index -- ) {
+        var byte = Math.floor(Math.random() * (100000000 + 1)) & 0xff;
+        byteArray [ index ] = byte;
+    }
+
+    return byteArray;
+};
 
 module.exports = (router) => {
 
 	router.post('/api/v1/ticket', async function(req, res) { // create ticketID and provide it
 		for (var i = 0; i < 1000; i ++){
-			var ticketID = Math.floor(Math.random() * (100000000 + 1)).toString();
+			function dec2hex(value) {
+				return (value + 0x100).toString(16).substr(-2).toUpperCase();
+			}
+			  
+			var byteArray =  createRandom32Bytes();
+			var resultBigHex = keccak256(byteArray);
+			var ticketID = bigInt(resultBigHex, 16).toString(10);
+			var ticketReveal = bigInt(byteArray.map(dec2hex).join(''), 16).toString(10);
+
 			const query = {
 				ticketID: ticketID
 			}
-			const update = { }
+			const update = {
+				ticketReveal: ticketReveal
+			 }
 			var tktInDB = await TicketModel.findOne(query);
 		
 			if (tktInDB == null) {

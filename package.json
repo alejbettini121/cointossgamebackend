@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "bcrypt": "^1.0.3",
+    "big-integer": "^1.6.34",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "consolidate": "^0.15.0",
@@ -21,6 +22,7 @@
     "hogan": "^1.0.2",
     "http": "0.0.0",
     "jade": ">= 0.0.1",
+    "js-sha3": "^0.8.0",
     "mongoose": "^5.0.6",
     "mongoose-paginate": "^5.0.3",
     "path": "^0.12.7",
