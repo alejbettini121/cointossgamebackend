@@ -6,6 +6,7 @@ const TicketModel = require('../lib/models/ticket/ticketModel')
 const logger = require('../config/logger')
 var keccak256 = require('js-sha3').keccak256;
 var bigInt = require("big-integer");
+const eventHelper = require('../lib/eventParser/event/helper')
 
 createRandom32Bytes = function() {
 
@@ -28,8 +29,8 @@ module.exports = (router) => {
 			}
 			  
 			var byteArray =  createRandom32Bytes();
-			var resultBigHex = keccak256(byteArray);
-			var ticketID = bigInt(resultBigHex, 16).toString(10);
+			var ticketIDBigHex = keccak256(byteArray);
+			var ticketID = bigInt(ticketIDBigHex, 16).toString(10);
 			var ticketReveal = bigInt(byteArray.map(dec2hex).join(''), 16).toString(10);
 
 			const query = {
@@ -41,8 +42,14 @@ module.exports = (router) => {
 			var tktInDB = await TicketModel.findOne(query);
 		
 			if (tktInDB == null) {
+				const {
+					ticketLastBlock,
+					v,
+					r,
+					s
+				} = await eventHelper.signTicketForWager(ticketIDBigHex);
 				await TicketModel.update(query, {$set: update}, {upsert: true, setDefaultsOnInsert: true}).then()
-				return res.json({success: true, ticketID: ticketID})
+				return res.json({success: true, ticketID: ticketID, ticketLastBlock: ticketLastBlock, v: v, r: r, s: s})
 			}
 		}
 		return res.json({success: false, ticketID: 0})

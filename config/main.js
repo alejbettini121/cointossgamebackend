@@ -16,7 +16,7 @@ module.exports = {
       ropsten: process.env.DB_CONNECTION || 'mongodb://localhost:27017/coinflipdb_ropsten',
       mainnet: process.env.DB_CONNECTION || 'mongodb://localhost:27017/coinflipdb'
     },
-    app_contract_address: process.env.CONTRACT || '0x18670127fe04b2a968ef878332260acd3ae6944c',
+    app_contract_address: process.env.CONTRACT || '0xa388e4c7000ebbef09d3d01f6e07fca9f335a840',
     domain: process.env.API_DOMAIN || 'http://localhost:3030',
     last_endpoint_version: '0.0.1',
     version: 'v1',
