@@ -2,6 +2,7 @@ const Contract = require('../lib/models/contract/contractModel')
 const WagerModel = require('../lib/models/event/wagerModel')
 const WinLoseModel = require('../lib/models/event/finalResultModel')
 const AnalyzedTicketModel = require('../lib/models/event/analyzedTicketModel')
+const JackpotPaymentModel = require('../../models/event/jackpotPaymentModel')
 const TicketModel = require('../lib/models/ticket/ticketModel')
 const logger = require('../config/logger')
 var keccak256 = require('js-sha3').keccak256;
@@ -68,12 +69,18 @@ module.exports = (router) => {
 		}
 	});
 
-	router.post('/api/v1/ticket/:id/wagered', function(req, res) { // provide transactionID when wager transaction starting
+	router.post('/api/v1/ticket/:id/wagered', function(req, res) {
 
 	});
 
-	router.get('/api/v1/allTickets', function(req, res) { // provide transactionID when wager transaction starting
-
+	router.get('/api/v1/jackpotWins', function(req, res) { 
+		JackpotPaymentModel.find({}, function(err, docs) {
+			if (!err){ 
+				res.json({success: true, data: docs})
+			} else {
+				throw err;
+			}
+		});
 	});
 
 	router.get('/api/v1/wageredTickets', function(req, res) { // provide wagered tickets on database
