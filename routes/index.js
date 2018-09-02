@@ -55,7 +55,7 @@ module.exports = (router) => {
 		return res.json({success: false, ticketID: 0})
 	});
 
-	router.get('/api/v1/ticket/:ticketID', function(req, res) { // get ticket status; created, waging, wagered, playing, win/lost
+	router.get('/api/v1/ticket/:ticketID', async function(req, res) { // get ticket status; created, waging, wagered, playing, win/lost
 
 		var tktInDB = await TicketModel.findOne({
 			ticketID: req.params.ticketID
