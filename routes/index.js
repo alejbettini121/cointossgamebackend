@@ -55,8 +55,17 @@ module.exports = (router) => {
 		return res.json({success: false, ticketID: 0})
 	});
 
-	router.get('/api/v1/ticket/:id', function(req, res) { // get ticket status; created, waging, wagered, playing, win/lost
+	router.get('/api/v1/ticket/:ticketID', function(req, res) { // get ticket status; created, waging, wagered, playing, win/lost
 
+		var tktInDB = await TicketModel.findOne({
+			ticketID: req.params.ticketID
+		});
+
+		if (tktInDB){
+			res.json({success: true, data: tktInDB})
+		} else {
+			res.json({success: false})
+		}
 	});
 
 	router.post('/api/v1/ticket/:id/wagered', function(req, res) { // provide transactionID when wager transaction starting
