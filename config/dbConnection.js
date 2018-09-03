@@ -7,7 +7,7 @@ const env = require('./main').environments
 const logger = require('./logger')
 
 mongoose.Promise = Promise
-process.env.NODE_ENV = env.ropsten
+process.env.NODE_ENV = env.mainnet
 
 // Service Database
 logger.info('Connecting to the Mongo DB: ' + config.db_connection[process.env.NODE_ENV])
