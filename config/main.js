@@ -9,7 +9,7 @@ module.exports = {
       ropsten: process.env.RPC_ENDPOINT || 'https://ropsten.infura.io/v3/18dfe3cb327e49aab39aa7fe0550337e',
       mainnet: process.env.RPC_ENDPOINT || 'https://mainnet.infura.io/Fi6gFcfwLWXX6YUOnke8'
     },
-    contract_included_block: 3871630,
+    contract_included_block: 6264663,
     parsing_active: true,
     db_connection: {
       test: 'mongodb://localhost:27017/coinflipdb',
